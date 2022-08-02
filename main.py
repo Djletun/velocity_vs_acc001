@@ -16,8 +16,12 @@ print('dir_path=', dir_path)
 SignalFileName = dir_path + 'data01'+symbol+'0.CSV'
 print(SignalFileName)
 with open(SignalFileName, 'r') as csvfile:
-    reader = csv.DictReader(csvfile)
-    print(*reader)
+    reader = csv.reader(csvfile, delimiter=',')
+    data = np.array(list(reader)).astype(float)
 
-    #for row in spamreader:
-       # print(', '.join(row))
+print(data[:][:, 1])
+print(data[:][:, 0])
+fig, ax = plt.subplots()
+ax.plot(data[:][:, 0],data[:][:, 1],linewidth = 1, color ='black')
+#plt.show()
+plt.savefig(SignalFileName + '.pdf', dpi=300)
