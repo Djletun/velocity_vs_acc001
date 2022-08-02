@@ -25,3 +25,4 @@ fig, ax = plt.subplots()
 ax.plot(data[:][:, 0],data[:][:, 1],linewidth = 1, color ='black')
 #plt.show()
 plt.savefig(SignalFileName + '.pdf', dpi=300)
+# signal len = 0.5 sec max ampl = 0.9
