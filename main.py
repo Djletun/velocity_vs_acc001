@@ -22,7 +22,17 @@ with open(SignalFileName, 'r') as csvfile:
 print(data[:][:, 1])
 print(data[:][:, 0])
 fig, ax = plt.subplots()
-ax.plot(data[:][:, 0],data[:][:, 1],linewidth = 1, color ='black')
+#ax.plot(data[:][:, 0],data[:][:, 1],linewidth = 1, color ='black')
 #plt.show()
-plt.savefig(SignalFileName + '.pdf', dpi=300)
+#plt.savefig(SignalFileName + '.pdf', dpi=300)
 # signal len = 0.5 sec max ampl = 0.9
+max_x = data[:][-1,0]
+null_y = data[:][0,1]
+max_y = max(data[:][:,1])
+ampl=max_y - null_y
+
+x_val = np.linspace(0, max_x, 500)
+signal_interp = 1/ampl*(np.interp(x_val, data[:][:, 0],data[:][:, 1])-null_y)
+
+ax.plot(range(0,500),signal_interp,linewidth = 1, color ='black')
+plt.savefig(SignalFileName + '.new.pdf', dpi=300)
